@@ -1,0 +1,22 @@
+services:
+  web:
+    image: debugdjango
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+  db:
+    image: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ../pgdata/testproject:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=testproject
+      - POSTGRES_PASSWORD=carpediem
+      - POSTGRES_DB=testproject 
